@@ -19,7 +19,7 @@ def parse_links(url:str,
     return links
 
 def parse_descriptions_and_rates(urls:List[str], 
-                                 time_to_load_url:Union[float, int]=3.) -> List[Tuple[str, float]]:
+                                 time_to_load_url:Union[float, int]=3.) -> Tuple[List[str], List[float]]:
     descriptions, rates = [], []
     
     with webdriver.Chrome(ChromeDriverManager().install()) as driver:
@@ -35,7 +35,7 @@ def parse_descriptions_and_rates(urls:List[str],
             descriptions.append(desc)
             rates.append(float(rate))
     
-    return list(zip(descriptions, rates))
+    return descriptions, rates
 
             
 
