@@ -18,9 +18,9 @@ def parse_links(url:str,
 
     return links
 
-def parse_descriptions_and_rates(urls:List[str], 
+def parse_data(urls:List[str], 
                                  time_to_load_url:Union[float, int]=3.) -> Tuple[List[str], List[float]]:
-    descriptions, rates = [], []
+    descriptions, rates, genres_list = [], [], []
     
     with webdriver.Chrome(ChromeDriverManager().install()) as driver:
 
@@ -31,12 +31,13 @@ def parse_descriptions_and_rates(urls:List[str],
 
             desc = driver.find_elements(By.CLASS_NAME, 'styles_paragraph__wEGPz')[0].text
             rate = driver.find_elements(By.CLASS_NAME, 'film-rating-value')[0].text
+            genres = driver.find_elements(By.CLASS_NAME, 'styles_valueLight__nAaO3')[5]
+
+            genres = genres.replace(",", "").split()
+            print(genres)
 
             descriptions.append(desc)
+            genres_list.append(genres)
             rates.append(float(rate))
     
-    return descriptions, rates
-
-            
-
-
+    return descriptions, rates, genres_list
