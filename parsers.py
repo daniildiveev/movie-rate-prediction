@@ -31,10 +31,9 @@ def parse_data(urls:List[str],
 
             desc = driver.find_elements(By.CLASS_NAME, 'styles_paragraph__wEGPz')[0].text
             rate = driver.find_elements(By.CLASS_NAME, 'film-rating-value')[0].text
-            genres = driver.find_elements(By.CLASS_NAME, 'styles_valueLight__nAaO3')[5]
+            genres = driver.find_elements(By.CLASS_NAME, 'styles_valueLight__nAaO3')[5].text
 
-            genres = genres.replace(",", "").split()
-            print(genres)
+            genres = genres.replace(",", "").split()[:-1]
 
             descriptions.append(desc)
             genres_list.append(genres)
