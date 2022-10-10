@@ -12,5 +12,5 @@ data = {
     'genres' : genres
 }
 
-with open("descriptions_and_rates.json", "w") as f:
+with open("descriptions_rates_and_genres.json", "w") as f:
     json.dump(data, f)
