@@ -61,7 +61,7 @@ def parse_data(urls:List[str],
             for xpath in GENRES_XPATHS:
                 genres += driver.find_elements(By.XPATH, xpath)
 
-            genres = [el.text for el in genres]
+            genres = [el.text.repace(',', '').split() for el in genres if '«' not in el.text]
             print(genres)
 
             descriptions.append(desc)
